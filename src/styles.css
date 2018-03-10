@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+    background-color: #b5c4c7;
+    font-family: 'Noto Sans', 'Open Sans', 'Roboto', 'Arial';
+    color: #333333;
+    padding: 6px; /* minimum padding for mobile devices */
+}
+.main-container {
+    max-width: 700px;
+    margin-right: auto;
+    margin-left: auto;
+    margin: auto;
+}
+
+.mat-progress-bar-fill, .mat-progress-bar-fill::after {
+    background-color: #00619E !important;
+}
+.mat-step-header .mat-step-icon {
+    background-color: #00619E !important;
+    color: #fff;
+}
+.mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+    background-color: #00619E;
+}
+.mat-step-icon {
+    height: 28px !important;
+    width: 28px !important;
+}

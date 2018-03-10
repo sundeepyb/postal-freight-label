@@ -1,0 +1,104 @@
+<mat-progress-bar class="shipping-progress" mode="determinate" [value]="barValue">
+</mat-progress-bar>
+<mat-horizontal-stepper [linear]="isLinear" (selectionChange)="nextStep($event)" #stepper>
+    <mat-step [stepControl]="stepOneFormGroup">
+        <div [formGroup]="stepOneFormGroup">
+            <ng-template matStepLabel>Sender</ng-template>
+            <mat-form-field class="one-line mt25">
+                <input matInput placeholder="Full Name" type="text" formControlName="name" />
+            </mat-form-field>
+            <mat-form-field class="one-line">
+                <input matInput placeholder="Address" type="text" formControlName="address" />
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="City" type="text" formControlName="city" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="State" formControlName="state">
+                    <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Zip" type="text" formControlName="zip" />
+            </mat-form-field>
+            <div class="button-row">
+                <button mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="stepTwoFormGroup">
+        <form [formGroup]="stepTwoFormGroup">
+            <ng-template matStepLabel>Receiver</ng-template>
+            <mat-form-field class="one-line mt25">
+                <input matInput placeholder="Full Name" type="text" formControlName="name" />
+            </mat-form-field>
+            <mat-form-field class="one-line">
+                <input matInput placeholder="Address" type="text" formControlName="address" />
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="City" type="text" formControlName="city" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="State" formControlName="state">
+                    <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Zip" type="text" formControlName="zip" />
+            </mat-form-field>
+            <div class="button-row">
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="stepThreeFormGroup">
+        <form [formGroup]="stepThreeFormGroup">
+            <ng-template matStepLabel>Weight</ng-template>
+            <div class="mt25">
+                <label class="field-label">Package Weight:</label>
+                <mat-form-field>
+                        <input matInput placeholder="Weight in lbs" type="number" [(ngModel)]="addressInfo.weight" formControlName="weight" />
+                </mat-form-field>
+            </div>
+            <div class="button-row">
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="stepFourFormGroup">
+        <form [formGroup]="stepFourFormGroup">
+            <ng-template matStepLabel>Options</ng-template>
+            <label class="one-line mt25">Choose a delivery option:</label>
+            <mat-radio-group formControlName="shippingCtrl" [(ngModel)]="addressInfo.shippingOption">
+                <mat-radio-button class="one-line shipping-option" value="0">Ground Shipping (<span class="darker">${{sCost[0]}}</span>)</mat-radio-button>
+                <mat-radio-button class="one-line shipping-option" value="1">Priority Shipping (<span class="darker">${{sCost[1]}}</span>)</mat-radio-button>
+            </mat-radio-group>
+            <div class="button-row">
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Confirm</ng-template>
+        <h3>Review Shipping Info</h3>
+        <div *ngIf="addressInfo.weight != undefined">
+            <label class="one-line darker mt25">Sender's Address</label>
+            <label class="one-line">{{addressInfo.from.name}}</label>
+            <label class="one-line">{{addressInfo.from.address}}, {{addressInfo.from.city}}, {{addressInfo.from.state}} {{addressInfo.from.zip}}</label>
+            <label class="one-line darker mt25">Receiver's Address</label>
+            <label class="one-line">{{addressInfo.to.name}}</label>
+            <label class="one-line">{{addressInfo.to.address}}, {{addressInfo.to.city}}, {{addressInfo.to.state}} {{addressInfo.to.zip}}</label>
+            <label class="one-line darker mt25">Shipping Option</label>
+            <label class="one-line">Weight : {{addressInfo.weight}}lbs</label>
+            <label class="one-line" *ngIf="addressInfo.shippingOption==0">Delivery Type : Ground</label>
+            <label class="one-line" *ngIf="addressInfo.shippingOption==1">Delivery Type : Priority</label>
+        </div>
+        <div class="button-row">
+            <button mat-raised-button matStepperPrevious>Back</button>
+            <button mat-raised-button (click)="onComplete()" color="primary">Submit</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

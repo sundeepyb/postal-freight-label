@@ -1,0 +1,25 @@
+.one-line {
+    display:block;
+}
+.mat-step-label-selected {
+    font-weight: 700;
+} 
+.field-label {
+    margin-right: 20px;
+}
+.darker {
+    font-weight: bold;
+}
+.shipping-option {
+    margin: 10px;
+}
+.shipping-progress {
+    height: 6px;
+}
+.mt25 {
+    margin-top: 25px;
+}
+.button-row {
+    margin-top: 30px;
+}
+
